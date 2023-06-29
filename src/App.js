@@ -6,6 +6,7 @@ function App() {
   const [typeTime, setTypeTime] = useState("astronomic");
   const [hoursPerDay, setHoursPerDay] = useState(1);
   const [endLessonTime, setEndLessonTime] = useState(time);
+  const [previousBreakTime, setPreviousBreakTime] = useState(0);
   time.setHours(7, 0);
   const startLessonTime = new Date();
   startLessonTime.setHours(7, 0);
@@ -44,13 +45,11 @@ function App() {
   };
 
   const changeAddBreakToEndLessonTime = (e) => {
-    const currentBreakTime = e.currentTarget.value;
-    const newTime = new Date(
-      endLessonTime.getTime() + Number(currentBreakTime) * 60000
-    );
+    const currentBreakTime = Number(e.currentTarget.value);
+    const timeToAdd = currentBreakTime - previousBreakTime;
+    const newTime = new Date(endLessonTime.getTime() + timeToAdd * 60000);
     setEndLessonTime(newTime);
-    console.log(currentBreakTime);
-    console.log(newTime);
+    setPreviousBreakTime(currentBreakTime);
   };
 
   return (
