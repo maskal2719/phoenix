@@ -9,13 +9,12 @@ export const breaksTimeOptions = [
   { value: 20, name: "20" },
   { value: 30, name: "30" },
 ];
-
 export const teachersOptions = [
   { value: "Popov", name: "Popov A.P" },
   { value: "Andreev", name: "Andreev V.V" },
 ];
-
 export const auditoryOptions = [
   { value: 112, name: "Аудитория №112" },
   { value: 10, name: "Аудитория №10 " },
 ];
+export const weeks = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
