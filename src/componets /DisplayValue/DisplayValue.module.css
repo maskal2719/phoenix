@@ -1,0 +1,20 @@
+.display {
+    display: flex;
+    align-items: center;
+    border: 1px solid grey;
+}
+
+.value {
+
+    width: 80px;
+    height: 40px;
+    text-align: center;
+}
+
+.span {
+    max-width: 50px;
+    height: 100%;
+    font-size: 10px;
+    text-align: center;
+    background-color: darkgrey;
+}

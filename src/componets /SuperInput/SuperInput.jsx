@@ -1,7 +1,14 @@
 import React from "react";
 
-const SuperInput = (children, value, type, callback) => {
-  return <input type={type} value={1} onChange={callback} />;
+const SuperInput = ({ value, typeInput, callback, readonly }) => {
+  return (
+    <input
+      readOnly={readonly}
+      type={typeInput}
+      value={value}
+      onChange={callback}
+    />
+  );
 };
 
 export default SuperInput;
