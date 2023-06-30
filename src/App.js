@@ -4,7 +4,12 @@ import SuperButton from "./componets /SuperButton/SuperButton";
 import DisplayValue from "./componets /DisplayValue/DisplayValue";
 import SuperSelect from "./componets /SuperSelect/SuperSelect";
 import SuperInput from "./componets /SuperInput/SuperInput";
-import { breaksTimeOptions, typeTimeOptions } from "./common/data/data";
+import {
+  auditoryOptions,
+  breaksTimeOptions,
+  teachersOptions,
+  typeTimeOptions,
+} from "./common/data/data";
 
 function App() {
   const time = new Date();
@@ -105,8 +110,8 @@ function App() {
         </div>
       </div>
       <div>
-        <SuperSelect />
-        <SuperSelect />
+        <SuperSelect options={teachersOptions} />
+        <SuperSelect options={auditoryOptions} />
       </div>
       <input type="submit" />
     </div>
