@@ -8,26 +8,16 @@ import { breaksTimeOptions, typeTimeOptions } from "./common/data/data";
 
 function App() {
   const time = new Date();
-  time.setHours(7, 0);
   const [typeTime, setTypeTime] = useState("astronomic");
   const [hoursPerDay, setHoursPerDay] = useState(1);
   const [endLessonTime, setEndLessonTime] = useState(time);
   const [previousBreakTime, setPreviousBreakTime] = useState(0);
+  time.setHours(7, 0);
   const startLessonTime = new Date();
   startLessonTime.setHours(7, 0);
-
-  const startLessonToNormalType = startLessonTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const endLessonToNormalType = endLessonTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const timeToAdd = typeTime === "academ" ? 45 : 60;
-
   typeTime === "academ" ? time.setHours(7, 45) : time.setHours(8, 0);
 
+  const timeToAdd = typeTime === "academ" ? 45 : 60;
   const handlePlusTime = () => {
     const newTime = new Date(endLessonTime.getTime() + timeToAdd * 60000);
     setEndLessonTime(newTime);
@@ -38,6 +28,14 @@ function App() {
     setEndLessonTime(newTime);
     setHoursPerDay((prevState) => prevState - 1);
   };
+  const startLessonToNormalType = startLessonTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const endLessonToNormalType = endLessonTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   const typeTimeChange = (e) => {
     const currentValue = e.currentTarget.value;
@@ -105,6 +103,10 @@ function App() {
             value={endLessonToNormalType}
           />
         </div>
+      </div>
+      <div>
+        <SuperSelect />
+        <SuperSelect />
       </div>
       <input type="submit" />
     </div>
