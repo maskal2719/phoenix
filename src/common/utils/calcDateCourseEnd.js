@@ -1,7 +1,9 @@
-export function calcEndDate(allTime, hoursInDay, daysPerWeek, arr) {
-  const currentDate = new Date();
-  const nextDay = new Date(currentDate);
-  const endDate = new Date(currentDate);
+export function calcEndDate(dateStart, allTime, hoursInDay, daysPerWeek, arr) {
+  const currentDate = new Date(dateStart);
+  const nextDay = new Date(dateStart);
+  const endDate = new Date(dateStart);
+
+  console.log(endDate);
 
   let day = 0;
   let dayAdd = 0;

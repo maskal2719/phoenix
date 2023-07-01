@@ -44,6 +44,7 @@ function App() {
 
   useEffect(() => {
     const endDate = calcEndDate(
+      dateCourseStart,
       allCourseTime,
       hoursPerDay,
       selectedDays.length,
