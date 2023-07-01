@@ -1,9 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import SuperButton from "./componets /SuperButton/SuperButton";
-import DisplayValue from "./componets /DisplayValue/DisplayValue";
-import SuperSelect from "./componets /SuperSelect/SuperSelect";
-import SuperInput from "./componets /SuperInput/SuperInput";
+import SuperButton from "./components/SuperButton/SuperButton";
+import DisplayValue from "./components/DisplayValue/DisplayValue";
+import SuperSelect from "./components/SuperSelect/SuperSelect";
+import SuperInput from "./components/SuperInput/SuperInput";
 import {
   auditoryOptions,
   breaksTimeOptions,
