@@ -212,24 +212,30 @@ function App() {
         </div>
         <div className={"block-itm"}>
           <SuperInput
+              className={"start-time"}
             readonly={true}
             typeInput={"time"}
             value={startLessonToNormalType}
           />
           <span className={"span"}>ДО</span>
           <SuperInput
+              className={"end-time"}
             readonly={true}
             typeInput={"time"}
             value={endLessonToNormalType}
           />
         </div>
       </div>
-      <div>
-        <SuperSelect options={teachersOptions} callback={changeTeachHandler} />
-        <SuperSelect
-          options={auditoryOptions}
-          callback={changeAuditoryHandler}
-        />
+      <div className={'selectsBlock'}>
+        <div className={'teacherItem'}>
+          <SuperSelect options={teachersOptions} callback={changeTeachHandler} />
+        </div>
+        <div className={'auditoryItem'}>
+          <SuperSelect
+              options={auditoryOptions}
+              callback={changeAuditoryHandler}
+          />
+        </div>
       </div>
       <button type="submit" onClick={handleSubmit}>
         Добавить расписание

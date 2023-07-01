@@ -27,19 +27,24 @@
   width: 122px;
   height: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border: 1px solid darkgrey;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .span {
-  border: 1px solid darkgrey;
   height: 100%;
-
+  display: flex;
+  align-items: center;
+  background: #bebebe;
+  color: white;
+  padding: 0px 5px 0px 5px;
 }
 
 .btnDays:hover {
+  /*background-color: #588df2*/
   background-color: dodgerblue;
   color: white;
 }
@@ -59,3 +64,38 @@
   justify-content: space-between;
   width: 31%;
 }
+
+
+/*------*/
+
+.start-time {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.end-time {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.selectsBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+.teacherItem {
+  width: 66%;
+}
+
+.auditoryItem {
+  width: 31%;
+}
+
+/*button::after {*/
+/*  content: "|";*/
+/*  color: black;*/
+/*  height: 15px;*/
+/*  margin-right: 5px;*/
+/*  position: absolute;*/
+/*  right: 20px;*/
+/*}*/

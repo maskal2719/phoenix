@@ -6,8 +6,19 @@
 
 .value {
     width: 80px;
-    height: 40px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+}
+
+.description {
+    background: #e2ecf3;
+    font-size: 12px;
+    padding: 10px 0px 10px 0px;
+    line-height: 0.8;
+    text-align: center;
+    border-left: 1px solid black;
 }
 
 .span {
