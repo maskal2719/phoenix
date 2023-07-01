@@ -1,6 +1,8 @@
 export function calcEndDate(dateStart, allTime, hoursInDay, daysPerWeek) {
   const days = Math.ceil(allTime / hoursInDay);
   const endDate = new Date(dateStart);
+  console.log(dateStart.getDate());
+  console.log(endDate);
   endDate.setDate(endDate.getDate() + Math.ceil(days / daysPerWeek) * 7);
   return endDate.toLocaleDateString("en-CA");
 }

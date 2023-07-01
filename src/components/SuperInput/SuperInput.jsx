@@ -1,10 +1,10 @@
 import React from "react";
+import s from '../SuperInput/SuperInput.module.css'
 
-const SuperInput = ({ value, typeInput, callback, readonly, className }) => {
+const SuperInput = ({ value, typeInput, callback, readonly, anyClassName }) => {
   return (
     <input
-      style={{width:"100%", border: "1px solid #bebebe"}}
-      className={className}
+      className={`${s.input} ${anyClassName}`}
       readOnly={readonly}
       type={typeInput}
       value={value}

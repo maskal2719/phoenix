@@ -1,4 +1,3 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import SuperButton from "./components/SuperButton/SuperButton";
 import DisplayValue from "./components/DisplayValue/DisplayValue";
@@ -13,6 +12,7 @@ import {
 } from "./common/data/data";
 import { getCurrentDate } from "./common/utils/getCurrentDate";
 import { calcEndDate } from "./common/utils/calcDateCourseEnd";
+import s from "./App.module.css";
 
 function App() {
   const currentDate = new Date();
@@ -134,21 +134,21 @@ function App() {
       auditory: auditory,
     };
     console.log(data);
-    console.log(data);
   };
 
   return (
-    <div className={"main"}>
-      <div className={"block"}>
-        <div className={"block-itm"}>
+    <div className={s.main}>
+      <div className={s.block}>
+        <div className={s.blockItm}>
           <SuperSelect
             defaultValue={typeTime}
             callback={typeTimeChange}
             options={typeTimeOptions}
           />
         </div>
-        <div className={"block-itm"}>
+        <div className={s.blockItm}>
           <SuperButton
+            anyClassName={s.borderLeftRadius}
             disable={allCourseTime < 2}
             callBack={handleMinusAllCourseTime}
           >
@@ -158,28 +158,34 @@ function App() {
             displayValue={allCourseTime}
             spanValue={"Всего часов"}
           />
-          <SuperButton callBack={handlePlusAllCourseTime}>+</SuperButton>
+          <SuperButton
+            callBack={handlePlusAllCourseTime}
+            anyClassName={s.borderRightRadius}
+          >
+            +
+          </SuperButton>
         </div>
-        <div className={"block-itm"}>
+        <div className={s.blockItm}>
           <SuperInput
+            anyClassName={s.borderLeftRadius}
             typeInput={"date"}
             value={dateCourseStart}
             callback={changeDateCourseStart}
           />
-          <span className={"span"}>ДО</span>
+          <span className={s.span}>до</span>
           <SuperInput
-            className={""}
+            anyClassName={s.borderRightRadius}
             typeInput={"date"}
             readonly={true}
             value={dateCourseEnd}
           />
         </div>
       </div>
-      <div className={"btns"}>
-        <button className={"btnDays"} onClick={setMondayWednesdayFridayClick}>
+      <div className={s.btns}>
+        <button className={s.btnDays} onClick={setMondayWednesdayFridayClick}>
           ПН/СР/ПТ
         </button>
-        <button className={"btnDays"} onClick={setTuesdayThursdayClick}>
+        <button className={s.btnDays} onClick={setTuesdayThursdayClick}>
           ВТ/ЧТ
         </button>
         {weeks.map((el, index) => (
@@ -187,59 +193,78 @@ function App() {
             key={index}
             onClick={() => changeDay(el)}
             className={
-              selectedDays.includes(el) ? "selectedDay btnDays" : "btnDays"
+              selectedDays.includes(el)
+                ? `${s.selectedDay} + ' ' + ${s.btnDays}`
+                : `${s.btnDays}`
             }
           >
             {el}
           </button>
         ))}
       </div>
-      <div className={"block"}>
-        <div className={"block-itm"}>
+      <div className={s.block}>
+        <div className={s.blockItm}>
           <SuperSelect
             callback={changeAddBreakToEndLessonTime}
             options={breaksTimeOptions}
           />
         </div>
-        <div className={"block-itm"}>
-          <SuperButton callBack={handleMinusTime} disable={hoursPerDay < 2}>
+        <div className={s.blockItm}>
+          <SuperButton
+            callBack={handleMinusTime}
+            disable={hoursPerDay < 2}
+            anyClassName={s.borderLeftRadius}
+          >
             -
           </SuperButton>
           <DisplayValue displayValue={hoursPerDay} spanValue={"Часов в день"} />
-          <SuperButton callBack={handlePlusTime} disable={hoursPerDay >= 12}>
+          <SuperButton
+            callBack={handlePlusTime}
+            disable={hoursPerDay >= 12}
+            anyClassName={s.borderRightRadius}
+          >
             +
           </SuperButton>
         </div>
-        <div className={"block-itm"}>
+        <div className={s.blockItm}>
           <SuperInput
-              className={"start-time"}
+            anyClassName={s.borderLeftRadius}
             readonly={true}
             typeInput={"time"}
             value={startLessonToNormalType}
           />
-          <span className={"span"}>ДО</span>
+          <span className={s.span}>до</span>
           <SuperInput
-              className={"end-time"}
+            anyClassName={s.borderRightRadius}
             readonly={true}
             typeInput={"time"}
             value={endLessonToNormalType}
           />
         </div>
       </div>
-      <div className={'selectsBlock'}>
-        <div className={'teacherItem'}>
-          <SuperSelect options={teachersOptions} callback={changeTeachHandler} />
-        </div>
-        <div className={'auditoryItem'}>
+      <div className={s.selectsBlock}>
+        <div className={s.teacherItem}>
           <SuperSelect
-              options={auditoryOptions}
-              callback={changeAuditoryHandler}
+            options={teachersOptions}
+            callback={changeTeachHandler}
+          />
+        </div>
+        <div className={s.auditoryItem}>
+          <SuperSelect
+            options={auditoryOptions}
+            callback={changeAuditoryHandler}
           />
         </div>
       </div>
-      <button type="submit" onClick={handleSubmit}>
-        Добавить расписание
-      </button>
+      <div className={s.notification}>
+        Выбор <b>преподавателя</b> и <b>аудитории</b> не обязателен
+      </div>
+      <hr />
+      <div className={s.btnsControl}>
+        <button className={s.submit} type="submit" onClick={handleSubmit}>
+          Добавить расписание
+        </button>
+      </div>
     </div>
   );
 }
