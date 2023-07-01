@@ -102,7 +102,6 @@ function App() {
     });
   };
 
-  console.log(selectedDays);
   const setMondayWednesdayFridayClick = () => {
     setSelectedDays(["ПН", "СР", "ПТ"]);
   };
@@ -140,12 +139,14 @@ function App() {
   return (
     <div className={"main"}>
       <div className={"block"}>
-        <SuperSelect
-          defaultValue={typeTime}
-          callback={typeTimeChange}
-          options={typeTimeOptions}
-        />
-        <div style={{ display: "flex" }}>
+        <div className={"block-itm"}>
+          <SuperSelect
+            defaultValue={typeTime}
+            callback={typeTimeChange}
+            options={typeTimeOptions}
+          />
+        </div>
+        <div className={"block-itm"}>
           <SuperButton
             disable={allCourseTime < 2}
             callBack={handleMinusAllCourseTime}
@@ -158,7 +159,7 @@ function App() {
           />
           <SuperButton callBack={handlePlusAllCourseTime}>+</SuperButton>
         </div>
-        <div>
+        <div className={"block-itm"}>
           <SuperInput
             typeInput={"date"}
             value={dateCourseStart}
@@ -193,11 +194,13 @@ function App() {
         ))}
       </div>
       <div className={"block"}>
-        <SuperSelect
-          callback={changeAddBreakToEndLessonTime}
-          options={breaksTimeOptions}
-        />
-        <div style={{ display: "flex" }}>
+        <div className={"block-itm"}>
+          <SuperSelect
+            callback={changeAddBreakToEndLessonTime}
+            options={breaksTimeOptions}
+          />
+        </div>
+        <div className={"block-itm"}>
           <SuperButton callBack={handleMinusTime} disable={hoursPerDay < 2}>
             -
           </SuperButton>
@@ -206,7 +209,7 @@ function App() {
             +
           </SuperButton>
         </div>
-        <div className={"block"}>
+        <div className={"block-itm"}>
           <SuperInput
             readonly={true}
             typeInput={"time"}

@@ -17,7 +17,6 @@
 .block {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
 }
 
 .btns {
@@ -53,4 +52,9 @@
 .input {
   width: 33%;
   height: 20px;
+}
+
+.block-itm {
+  display: flex;
+  width: 33%;
 }
