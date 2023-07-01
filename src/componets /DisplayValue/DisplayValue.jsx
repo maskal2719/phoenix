@@ -5,7 +5,7 @@ const DisplayValue = ({ displayValue, spanValue }) => {
   return (
     <div className={s.display}>
       <span className={s.value}>{displayValue}</span>
-      <span className={s.span}>{spanValue}</span>
+      <span className={s.value}>{spanValue}</span>
     </div>
   );
 };
