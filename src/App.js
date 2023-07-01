@@ -17,7 +17,7 @@ import s from "./App.module.css";
 function App() {
   const currentDate = new Date();
   const [typeTime, setTypeTime] = useState("astronomic");
-  const [allCourseTime, setAllCourseTime] = useState(20);
+  const [allCourseTime, setAllCourseTime] = useState(10);
   const [dateCourseStart, setDateCourseStart] = useState(getCurrentDate());
   const [dateCourseEnd, setDateCourseEnd] = useState("");
   const [hoursPerDay, setHoursPerDay] = useState(1);
@@ -41,18 +41,22 @@ function App() {
     hour: "2-digit",
     minute: "2-digit",
   });
-  // const mwf = ["ПН", "СР", "ПТ"];
-  // const tt = ["ВТ", "ЧТ"];
 
   useEffect(() => {
     const endDate = calcEndDate(
-      dateCourseStart,
       allCourseTime,
       hoursPerDay,
-      selectedDays.length
+      selectedDays.length,
+      selectedDays
     );
     setDateCourseEnd(endDate);
-  }, [allCourseTime, dateCourseStart, hoursPerDay, selectedDays.length]);
+  }, [
+    allCourseTime,
+    dateCourseStart,
+    hoursPerDay,
+    selectedDays.length,
+    selectedDays,
+  ]);
 
   const handlePlusTime = () => {
     const newTime = new Date(endLessonTime.getTime() + timeToAdd * 60000);

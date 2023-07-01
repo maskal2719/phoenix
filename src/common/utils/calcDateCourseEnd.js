@@ -1,15 +1,24 @@
-export function calcEndDate(dateStart, allTime, hoursInDay, daysPerWeek) {
-  const days = Math.ceil(allTime / hoursInDay);
-  const endDate = new Date(dateStart);
-  console.log(dateStart.getDate());
-  console.log(endDate);
-  endDate.setDate(endDate.getDate() + Math.ceil(days / daysPerWeek) * 7);
+export function calcEndDate(allTime, hoursInDay, daysPerWeek, arr) {
+  const currentDate = new Date();
+  const nextDay = new Date(currentDate);
+  const endDate = new Date(currentDate);
+
+  let day = 0;
+  let dayAdd = 0;
+  const daysOf = ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+  let indexNameDay = daysOf[currentDate.getDay()];
+  const daysNeeded = Math.ceil(allTime / hoursInDay);
+
+  while (day < daysNeeded) {
+    if (arr.length === 0) return;
+    dayAdd++;
+    indexNameDay = daysOf[nextDay.getDay()];
+    if (arr.includes(indexNameDay)) {
+      day++;
+    }
+    nextDay.setDate(nextDay.getDate() + 1);
+  }
+
+  endDate.setDate(currentDate.getDate() + (dayAdd - 1 / hoursInDay));
   return endDate.toLocaleDateString("en-CA");
 }
-// function calcEndDate(startDate, daysPerWeek, totalHours, hoursPerDay) {
-//   const totalDays = totalHours / hoursPerDay;
-//   const totalWeeks = Math.ceil(totalDays / daysPerWeek);
-//   const endDate = new Date(startDate);
-//   endDate.setDate(startDate.getDate() + (totalWeeks * daysPerWeek));
-//   return endDate;
-// }
