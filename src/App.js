@@ -164,8 +164,9 @@ function App() {
             value={dateCourseStart}
             callback={changeDateCourseStart}
           />
-          <span>ДО</span>
+          <span className={"span"}>ДО</span>
           <SuperInput
+            className={""}
             typeInput={"date"}
             readonly={true}
             value={dateCourseEnd}

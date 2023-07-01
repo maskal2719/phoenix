@@ -49,3 +49,8 @@
   background-color: dodgerblue;
   color: white;
 }
+
+.input {
+  width: 33%;
+  height: 20px;
+}
