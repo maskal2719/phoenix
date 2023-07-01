@@ -1,11 +1,15 @@
 import React from "react";
 
-const SuperSelect = ({ callback, defaultValue, options }) => {
+const SuperSelect = ({ callback, defaultValue, options, placeholder }) => {
   return (
-    <select defaultValue={defaultValue} onChange={callback}>
+    <select
+      defaultValue={defaultValue}
+      onChange={callback}
+      placeholder={placeholder}
+    >
       {options &&
         options.map((el) => (
-          <option key={el.value} value={el.value}>
+          <option key={el?.value} value={el?.value}>
             {el.name}
           </option>
         ))}

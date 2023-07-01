@@ -1,6 +1,6 @@
 import React from "react";
 
-const SuperInput = ({ value, typeInput, callback, readonly }) => {
+const SuperInput = ({ value, typeInput, callback, readonly, min }) => {
   return (
     <input
       readOnly={readonly}

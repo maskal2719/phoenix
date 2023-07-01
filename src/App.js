@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuperButton from "./componets /SuperButton/SuperButton";
 import DisplayValue from "./componets /DisplayValue/DisplayValue";
 import SuperSelect from "./componets /SuperSelect/SuperSelect";
@@ -11,20 +11,49 @@ import {
   typeTimeOptions,
   weeks,
 } from "./common/data/data";
+import { getCurrentDate } from "./common/utils/getCurrentDate";
+import { calcEndDate } from "./common/utils/calcDateCourseEnd";
 
 function App() {
-  const time = new Date();
+  const currentDate = new Date();
   const [typeTime, setTypeTime] = useState("astronomic");
+  const [allCourseTime, setAllCourseTime] = useState(20);
+  const [dateCourseStart, setDateCourseStart] = useState(getCurrentDate());
+  const [dateCourseEnd, setDateCourseEnd] = useState("");
   const [hoursPerDay, setHoursPerDay] = useState(1);
-  const [endLessonTime, setEndLessonTime] = useState(time);
+  const [endLessonTime, setEndLessonTime] = useState(currentDate);
   const [previousBreakTime, setPreviousBreakTime] = useState(0);
-  const [selectedDays, setSelectedDays] = useState([]);
-  time.setHours(7, 0);
+  const [selectedDays, setSelectedDays] = useState(["ПН", "СР", "ПТ"]);
+  const [teach, setTeach] = useState(null);
+  const [auditory, setAuditory] = useState(null);
+  currentDate.setHours(7, 0);
   const startLessonTime = new Date();
   startLessonTime.setHours(7, 0);
-  typeTime === "academ" ? time.setHours(7, 45) : time.setHours(8, 0);
-
+  typeTime === "academ"
+    ? currentDate.setHours(7, 45)
+    : currentDate.setHours(8, 0);
   const timeToAdd = typeTime === "academ" ? 45 : 60;
+  const startLessonToNormalType = startLessonTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const endLessonToNormalType = endLessonTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  // const mwf = ["ПН", "СР", "ПТ"];
+  // const tt = ["ВТ", "ЧТ"];
+
+  useEffect(() => {
+    const endDate = calcEndDate(
+      dateCourseStart,
+      allCourseTime,
+      hoursPerDay,
+      selectedDays.length
+    );
+    setDateCourseEnd(endDate);
+  }, [allCourseTime, dateCourseStart, hoursPerDay, selectedDays.length]);
+
   const handlePlusTime = () => {
     const newTime = new Date(endLessonTime.getTime() + timeToAdd * 60000);
     setEndLessonTime(newTime);
@@ -35,15 +64,12 @@ function App() {
     setEndLessonTime(newTime);
     setHoursPerDay((prevState) => prevState - 1);
   };
-  const startLessonToNormalType = startLessonTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const endLessonToNormalType = endLessonTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
+  const handlePlusAllCourseTime = () => {
+    setAllCourseTime((prevState) => prevState + 1);
+  };
+  const handleMinusAllCourseTime = () => {
+    setAllCourseTime((prevState) => prevState - 1);
+  };
   const typeTimeChange = (e) => {
     const currentValue = e.currentTarget.value;
     setTypeTime(currentValue);
@@ -59,7 +85,6 @@ function App() {
       setEndLessonTime(newTime);
     }
   };
-
   const changeAddBreakToEndLessonTime = (e) => {
     const currentBreakTime = Number(e.currentTarget.value);
     const timeToAdd = currentBreakTime - previousBreakTime;
@@ -76,84 +101,117 @@ function App() {
       }
     });
   };
+
+  console.log(selectedDays);
   const setMondayWednesdayFridayClick = () => {
     setSelectedDays(["ПН", "СР", "ПТ"]);
   };
   const setTuesdayThursdayClick = () => {
     setSelectedDays(["ВТ", "ЧТ"]);
   };
+  const changeDateCourseStart = (e) => {
+    const newDate = e.currentTarget.value;
+    setDateCourseStart(newDate);
+  };
+  const changeTeachHandler = (e) => {
+    setTeach(e.currentTarget.value);
+  };
+  const changeAuditoryHandler = (e) => {
+    setAuditory(e.currentTarget.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      typeTime: typeTime,
+      hoursPerDay: hoursPerDay,
+      allCourseTime: allCourseTime,
+      endLessonTime: endLessonToNormalType,
+      previousBreakTime: previousBreakTime,
+      selectedDays: selectedDays,
+      dateCourseStart: dateCourseStart,
+      dateCourseEnd: dateCourseEnd,
+      startLessonTime: startLessonToNormalType,
+      teach: teach,
+      auditory: auditory,
+    };
+    console.log(data);
+  };
 
-  const mwf = ["ПН", "СР", "ПТ"];
-  const tt = ["ВТ", "ЧТ"];
-
-  console.log(selectedDays);
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <div style={{ display: "flex", gap: "20px" }}>
+    <div className={"main"}>
+      <div className={"block"}>
         <SuperSelect
           defaultValue={typeTime}
           callback={typeTimeChange}
           options={typeTimeOptions}
         />
         <div style={{ display: "flex" }}>
-          <SuperButton callBack={handleMinusTime}>-</SuperButton>
-          <DisplayValue displayValue={hoursPerDay} spanValue={"Всего часов"} />
-          <SuperButton callBack={handlePlusTime}>+</SuperButton>
+          <SuperButton
+            disable={allCourseTime < 2}
+            callBack={handleMinusAllCourseTime}
+          >
+            -
+          </SuperButton>
+          <DisplayValue
+            displayValue={allCourseTime}
+            spanValue={"Всего часов"}
+          />
+          <SuperButton callBack={handlePlusAllCourseTime}>+</SuperButton>
         </div>
         <div>
-          <SuperInput typeInput={"date"} />
+          <SuperInput
+            typeInput={"date"}
+            value={dateCourseStart}
+            callback={changeDateCourseStart}
+          />
           <span>ДО</span>
-          <SuperInput typeInput={"date"} readonly={true} />
+          <SuperInput
+            typeInput={"date"}
+            readonly={true}
+            value={dateCourseEnd}
+          />
         </div>
       </div>
-      <div>
-        <button
-          onClick={setMondayWednesdayFridayClick}
-          className={
-            selectedDays.includes(...mwf) && selectedDays.length === 3
-              ? "selectedDay"
-              : ""
-          }
-        >
+      <div className={"btns"}>
+        <button className={"btnDays"} onClick={setMondayWednesdayFridayClick}>
           ПН/СР/ПТ
         </button>
-        <button
-          onClick={setTuesdayThursdayClick}
-          className={
-            selectedDays.includes(...tt) && selectedDays.length === 2
-              ? "selectedDay"
-              : ""
-          }
-        >
+        <button className={"btnDays"} onClick={setTuesdayThursdayClick}>
           ВТ/ЧТ
         </button>
         {weeks.map((el, index) => (
           <button
             key={index}
             onClick={() => changeDay(el)}
-            className={selectedDays.includes(el) ? "selectedDay" : ""}
+            className={
+              selectedDays.includes(el) ? "selectedDay btnDays" : "btnDays"
+            }
           >
             {el}
           </button>
         ))}
       </div>
-      <div style={{ display: "flex", gap: "20px" }}>
+      <div className={"block"}>
         <SuperSelect
           callback={changeAddBreakToEndLessonTime}
           options={breaksTimeOptions}
         />
         <div style={{ display: "flex" }}>
-          <SuperButton callBack={handleMinusTime}>-</SuperButton>
+          <SuperButton callBack={handleMinusTime} disable={hoursPerDay < 2}>
+            -
+          </SuperButton>
           <DisplayValue displayValue={hoursPerDay} spanValue={"Часов в день"} />
-          <SuperButton callBack={handlePlusTime}>+</SuperButton>
+          <SuperButton callBack={handlePlusTime} disable={hoursPerDay >= 12}>
+            +
+          </SuperButton>
         </div>
-        <div>
+        <div className={"block"}>
           <SuperInput
             readonly={true}
             typeInput={"time"}
             value={startLessonToNormalType}
           />
-          <span>ДО</span>
+          <span className={"span"}>ДО</span>
           <SuperInput
             readonly={true}
             typeInput={"time"}
@@ -162,10 +220,15 @@ function App() {
         </div>
       </div>
       <div>
-        <SuperSelect options={teachersOptions} />
-        <SuperSelect options={auditoryOptions} />
+        <SuperSelect options={teachersOptions} callback={changeTeachHandler} />
+        <SuperSelect
+          options={auditoryOptions}
+          callback={changeAuditoryHandler}
+        />
       </div>
-      <input type="submit" />
+      <button type="submit" onClick={handleSubmit}>
+        Добавить расписание
+      </button>
     </div>
   );
 }

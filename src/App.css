@@ -4,6 +4,48 @@
   box-sizing: border-box;
 }
 
+.main {
+  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.block {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.btns {
+  display: flex;
+}
+
+.btnDays {
+  width: 122px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid darkgrey;
+  border-radius: 2px;
+}
+
+.span {
+  border: 1px solid darkgrey;
+  height: 100%;
+
+}
+
+.btnDays:hover {
+  background-color: dodgerblue;
+  color: white;
+}
+
 .selectedDay {
-  background-color: lightblue;
+  background-color: dodgerblue;
+  color: white;
 }

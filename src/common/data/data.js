@@ -4,17 +4,27 @@ export const typeTimeOptions = [
 ];
 export const breaksTimeOptions = [
   { value: 0, name: "Без перерыва" },
-  { value: 5, name: "5" },
-  { value: 10, name: "10" },
-  { value: 20, name: "20" },
-  { value: 30, name: "30" },
+  { value: 5, name: "Перерыв 5 минут" },
+  { value: 10, name: "Перерыв 10 минут" },
+  { value: 20, name: "Перерыв 20 минут" },
+  { value: 30, name: "Перерыв 30 минут" },
 ];
 export const teachersOptions = [
+  { value: "", name: "Выберите преподавателя на это время" },
   { value: "Popov", name: "Popov A.P" },
   { value: "Andreev", name: "Andreev V.V" },
 ];
 export const auditoryOptions = [
+  { value: null, name: "Выберите аудиторию" },
   { value: 112, name: "Аудитория №112" },
   { value: 10, name: "Аудитория №10 " },
 ];
 export const weeks = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+
+// {value: 1, name: 'ПН' },
+// {value: 2, name: 'ВТ' },
+// {value: 3, name: 'СР' },
+// {value: 4, name: 'ЧТ' },
+// {value: 5, name: 'ПТ' },
+// {value: 6, name: 'СБ' },
+// {value: 0, name: 'ВС' },
