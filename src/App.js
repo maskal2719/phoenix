@@ -134,6 +134,7 @@ function App() {
       auditory: auditory,
     };
     console.log(data);
+    console.log(data);
   };
 
   return (
