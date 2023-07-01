@@ -1,8 +1,9 @@
 import React from "react";
-
+import s from "./SuperSelect.module.css";
 const SuperSelect = ({ callback, defaultValue, options, placeholder }) => {
   return (
     <select
+      className={s.select}
       defaultValue={defaultValue}
       onChange={callback}
       placeholder={placeholder}

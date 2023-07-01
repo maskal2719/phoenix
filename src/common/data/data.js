@@ -20,11 +20,3 @@ export const auditoryOptions = [
   { value: 10, name: "Аудитория №10 " },
 ];
 export const weeks = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
-
-// {value: 1, name: 'ПН' },
-// {value: 2, name: 'ВТ' },
-// {value: 3, name: 'СР' },
-// {value: 4, name: 'ЧТ' },
-// {value: 5, name: 'ПТ' },
-// {value: 6, name: 'СБ' },
-// {value: 0, name: 'ВС' },

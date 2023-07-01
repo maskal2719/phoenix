@@ -56,5 +56,6 @@
 
 .block-itm {
   display: flex;
-  width: 33%;
+  justify-content: space-between;
+  width: 31%;
 }
